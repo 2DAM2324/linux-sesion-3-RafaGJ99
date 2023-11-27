@@ -1,0 +1,159 @@
+Ejercicio 1: Escriba, al menos, cinco variables de entorno junto con el valor que tienen.
+
+rafael@rafael-VirtualBox:~$ DESKTOP_SESSION=Linux
+rafael@rafael-VirtualBox:~$ echo $DESKTOP_SESSION
+Linux
+rafael@rafael-VirtualBox:~$ DESKTOP_SESSION=Ubuntu
+rafael@rafael-VirtualBox:~$ echo $DESKTOP_SESSION
+Ubuntu
+rafael@rafael-VirtualBox:~$ USER=RAFAEL
+rafael@rafael-VirtualBox:~$ echo $USER
+RAFAEL
+rafael@rafael-VirtualBox:~$ USER=rafael
+rafael@rafael-VirtualBox:~$ echo $USER
+rafael
+rafael@rafael-VirtualBox:~$ DISPLAY=:1
+rafael@rafael-VirtualBox:~$ echo $DISPLAY
+:1
+rafael@rafael-VirtualBox:~$ DISPLAY=:0
+rafael@rafael-VirtualBox:~$ echo $DISPLAY
+:0
+rafael@rafael-VirtualBox:~$ SHLVL=5
+rafael@rafael-VirtualBox:~$ echo $SHLVL
+5
+rafael@rafael-VirtualBox:~$ SHLVL=1
+rafael@rafael-VirtualBox:~$ echo $SHLVL
+1
+rafael@rafael-VirtualBox:~$ GNOME_SETUP_DISPLAY=:7
+rafael@rafael-VirtualBox:~$ echo $GNOME_SETUP_DISPLAY
+:7
+rafael@rafael-VirtualBox:~$ GNOME_SETUP_DISPLAY=:1
+rafael@rafael-VirtualBox:~$ echo $GNOME_SETUP_DISPLAY
+:1
+
+Ejercicio 2: Ejecute las órdenes del cuadro e indique qué ocurre y cómo puede resolver la situación para que la variable NOMBRE se reconozca en el shell hijo.
+
+rafael@rafael-VirtualBox:~$ NOMBRE=FS
+rafael@rafael-VirtualBox:~$ echo $NOMBRE
+FS
+rafael@rafael-VirtualBox:~$ bash
+rafael@rafael-VirtualBox:~$ echo $NOMBRE
+
+rafael@rafael-VirtualBox:~$ export NOMBRE=rafael
+rafael@rafael-VirtualBox:~$ echo $NOMBRE
+rafael
+
+
+
+rafael@rafael-VirtualBox:~$ echo "Los archicos que hay en el directorio son:" $(ls -l)
+Los archicos que hay en el directorio son: total 44 drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Desktop drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Documents drwxr-xr-x 2 rafael rafael 4096 oct 23 13:50 Downloads drwxrwxr-x 5 rafael rafael 4096 oct 23 13:50 linux-sesi-n-1-RafaGJ99 drwxrwxr-x 4 rafael rafael 4096 oct 30 12:51 linux-sesion-2-RafaGJ99 drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Music drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Pictures drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Public drwx------ 4 rafael rafael 4096 oct 23 11:57 snap drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Templates drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Videos
+rafael@rafael-VirtualBox:~$ echo "Los archicos que hay en el directorio son: $(ls -l)"
+Los archicos que hay en el directorio son: total 44
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Desktop
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Documents
+drwxr-xr-x 2 rafael rafael 4096 oct 23 13:50 Downloads
+drwxrwxr-x 5 rafael rafael 4096 oct 23 13:50 linux-sesi-n-1-RafaGJ99
+drwxrwxr-x 4 rafael rafael 4096 oct 30 12:51 linux-sesion-2-RafaGJ99
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Music
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Pictures
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Public
+drwx------ 4 rafael rafael 4096 oct 23 11:57 snap
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Templates
+drwxr-xr-x 2 rafael rafael 4096 oct 16 12:39 Videos
+
+La diferencia que encontramos es que con las comillas después de los dos puntos no nos sale de manera ordenada, al contrario que si colocamos las comillas tanto al principio como al final que nos mostrará la lista de manera más ordenada.
+
+Si sustituimos las comillas dobles por comillas simples observaremos que el comando no se ejecuta y muestra de nuevo este.
+
+rafael@rafael-VirtualBox:~$ echo 'Los archivos que hay en el escritorio son: $(ls -l)'
+Los archivos que hay en el escritorio son: $(ls -l)
+
+Ejercicio 4: Pruebe la siguiente asignación:
+
+$ numero=$numero + 1
+$ echo $numero
+¿Qué ha ocurrido?
+
+rafael@rafael-VirtualBox:~$ numero=6+1
+rafael@rafael-VirtualBox:~$ echo $numero
+6+1
+rafael@rafael-VirtualBox:~$ numero=$numero+1
+rafael@rafael-VirtualBox:~$ echo $numero
+6+1+1
+rafael@rafael-VirtualBox:~$ unset numero
+rafael@rafael-VirtualBox:~$ echo $numero
+
+
+Primeramente cambié el valor de numero a 6+1 por confusión, por lo cual me sale el valor insertado + 1, por lo cual se ha concatena la cifra insertada con la anteriormente declarada.
+
+Ejercicio 5. Construya un guion que acepte como argumento una cadena de texto (por ejemplo, su nombre) y que visualice en pantalla la frase Hola y el nombre dado como argumento.
+
+rafael@rafael-VirtualBox:~$ nano script.sh
+
+[ GNU nano 6.2
+#!/bin/bash
+
+var=$1
+echo "Hola " $var ]
+rafael@rafael-VirtualBox:~$ bash script.sh rafael
+Hola  rafael
+
+Ejercicio 6. Varíe el guion anterior para que admita una lista de nombres.
+
+[ GNU nano 6.2
+#!/bin/bash 
+
+var=$* 
+echo "Hola" $var ]
+
+rafael@rafael-VirtualBox:~$ bash script.sh Rafa, Ana y Lucía
+Hola Rafa, Ana y Lucía
+
+Ejercicio 7. Cree tres variables llamadas VAR1, VAR2 y VAR3 con los siguientes valores respectivamente “hola”, “adios” y “14”.
+
+a) Imprima los valores de las tres variables en tres columnas con 15 caracteres de ancho.
+rafael@rafael-VirtualBox:~$ printf "%-15s %-15s %-15s\n" "$VAR1" "$VAR2" "$VAR3"
+
+b) ¿Son variables locales o globales?
+Son variables locales. 
+
+c) Borre la variable VAR2.
+rafael@rafael-VirtualBox:~$ unset VAR2
+
+d) Abra otra ventana de tipo terminal, ¿puede visualizar las dos variables restantes?
+No se puede tras haber utilizado el comando "unset"
+
+e) Cree una variable de tipo vector con los valores iniciales de las tres variables.
+rafael@rafael-VirtualBox:~$ VAR7=(hola adios 14)
+
+f) Muestre el segundo elemento del vector creado en el apartado e.
+rafael@rafael-VirtualBox:~$ echo ${VAR7[1]}
+
+Ejercicio 8. Cree un alias que se llame ne (nombrado así para indicar el número de elementos) y que devuelva el número de archivos que existen en el directorio actual. ¿Qué cambiaría si queremos que haga lo mismo pero en el directorio home correspondiente al usuario que lo ejecuta?
+
+rafael@rafael-VirtualBox:~$ alias ne='ls -A | wc -l' 
+rafael@rafael-VirtualBox:~$ alias ne='cd;ls -A | wc -l'
+
+Ejercicio 9. Indique la línea de orden necesaria para buscar todos los archivos a partir del directorio home que tengan un tamaño menor de un bloque. ¿Cómo la modificaría para que además imprima el resultado en un archivo que se cree dentro del directorio donde nos encontremos y que se llame archivosP?
+
+rafael@rafael-VirtualBox:~$ find $HOME -size -1
+rafael@rafael-VirtualBox:~$ find $HOME -size -1 > archivosP
+
+Ejercicio 10. Indique cómo buscaría todos aquellos archivos del directorio actual que contengan la palabra “ejemplo”.
+
+rafael@rafael-VirtualBox:~$ grep ejemplo *
+
+Ejercicio 11. Complete la información de find y grep utilizando para ello la orden man.
+
+rafael@rafael-VirtualBox:~$ man find
+rafael@rafael-VirtualBox:~$ man grep
+
+Ejercicio 12. Indique cómo buscaría si un usuario dispone de una cuenta en el sistema.
+
+rafael@rafael-VirtualBox:~$ cat /etc/passwd | cut -d: -f1 | grep nombreUsuario
+
+Ejercicio 13. Indique cómo contabilizar el número de ficheros de la propia cuenta de usuario que no tengan
+permiso de lectura para el resto de usuarios.
+
+rafael@rafael-VirtualBox:~$ find ~ -type f ! -perm /o=r -ls | wc -l
+
